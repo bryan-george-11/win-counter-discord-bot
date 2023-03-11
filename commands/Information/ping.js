@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 module.exports = {
@@ -10,12 +10,12 @@ module.exports = {
     description: "Gives you information on how fast the Bot can respond to you",
     run: async (client, message, args, user, text, prefix) => {
     try{
-      message.channel.send(new MessageEmbed()
+      message.channel.send(new EmbedBuilder()
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`🏓 Pinging....`)
       ).then(msg=>{
-        msg.edit(new MessageEmbed()
+        msg.edit(new EmbedBuilder()
           .setColor(ee.color)
           .setFooter(ee.footertext, ee.footericon)
           .setTitle(`🏓 Ping is \`${Math.round(client.ws.ping)}ms\``)
@@ -23,7 +23,7 @@ module.exports = {
       })
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send(new EmbedBuilder()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)

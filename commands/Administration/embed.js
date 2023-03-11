@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     run: async (client, message, args, user, text, prefix) => {
     try{
       if(!args[0])
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send(new EmbedBuilder()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | You didn't provided a Title, nor a Description`)
@@ -20,7 +20,7 @@ module.exports = {
       let userargs = args.join(" ").split("++");
       let title = userargs[0];
       let desc = userargs.slice(1).join(" ")
-      message.channel.send(new MessageEmbed()
+      message.channel.send(new EmbedBuilder()
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(title ? title : "")
@@ -28,7 +28,7 @@ module.exports = {
       )
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send(new EmbedBuilder()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)

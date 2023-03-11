@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 const { duration } = require("../../handlers/functions")
@@ -11,14 +11,14 @@ module.exports = {
     description: "Returns the duration on how long the Bot is online",
     run: async (client, message, args, user, text, prefix) => {
     try{
-      message.channel.send(new MessageEmbed()
+      message.channel.send(new EmbedBuilder()
         .setColor(ee.color)
         .setFooter(ee.footertext, ee.footericon)
         .setTitle(`:white_check_mark: **${client.user.username}** is since:\n ${duration(client.uptime)} online`)
       );
     } catch (e) {
         console.log(String(e.stack).bgRed)
-        return message.channel.send(new MessageEmbed()
+        return message.channel.send(new EmbedBuilder()
             .setColor(ee.wrongcolor)
             .setFooter(ee.footertext, ee.footericon)
             .setTitle(`❌ ERROR | An error occurred`)
