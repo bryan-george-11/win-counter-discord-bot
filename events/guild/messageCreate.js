@@ -4,14 +4,31 @@ const config = require("../../config/config.js");
 const { QuickDB } = require("quick.db");
 const db = new QuickDB();
 
+const { MongoClient } = require('mongodb');
+const uri = process.env.MONGODB_TOKEN;
+const dbClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 module.exports = {
   name: "messageCreate"
 };
+
+(async () => {
+  try {
+    await dbClient.connect();
+    console.log("Connected to MongoDB database");
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+})();
 
 client.on('messageCreate', async (message) => {
   if (message.channel.type !== 0) return;
   if (message.author.bot) return;
 
+  console.log('i show all the time')
+
+  const database = await dbClient.db('warzoneWinsDB');
   const prefix = await db.get(`guild_prefix_${message.guild.id}`) || config.Prefix || "?";
 
   if (!message.content.startsWith(prefix)) return;
@@ -42,7 +59,7 @@ client.on('messageCreate', async (message) => {
         const allowedUsers = []; // New Array.
 
         config.Users.OWNERS.forEach(user => {
-         const fetchedUser = message.guild.members.cache.get(user);
+          const fetchedUser = message.guild.members.cache.get(user);
           if (!fetchedUser) return allowedUsers.push('*Unknown User#0000*');
           allowedUsers.push(`${fetchedUser.user.tag}`);
         })
@@ -58,7 +75,7 @@ client.on('messageCreate', async (message) => {
     };
 
     try {
-      command.run(client, message, args, prefix, config, db);
+      command.run(client, message, args, prefix, config, database, db);
     } catch (error) {
       console.error(error);
     };
