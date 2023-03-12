@@ -1,66 +1,68 @@
-﻿//Importing all needed Commands
-require('dotenv').config(); //this package is for using .env files, which we use for our Bot Token and some other things
-const Discord = require("discord.js"); //this is the official discord.js wrapper for the Discord Api, which we use!
+require('dotenv').config()
+const { Client, Partials, Collection, GatewayIntentBits } = require('discord.js');
+const config = require('./config/config');
 const colors = require("colors");
-const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js');
 
-//this Package is used, to change the colors of our Console! (optional and doesnt effect performance)
-const fs = require("fs"); //this package is for reading files and getting their inputs
-
-//Creating the Discord.js Client for This Bot with some default settings ;) and with partials, so you can fetch OLD messages
+// Creating a new client:
 const client = new Client({
-  messageCacheLifetime: 60,
-  fetchAllMembers: false,
-  messageCacheMaxSize: 10,
-  restTimeOffset: 0,
-  restWsBridgetimeout: 100,
-  disableEveryone: true,
-  partials: [Partials.Channel, Partials.GuildMember, Partials.Message, Partials.Reaction, Partials.User],
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildEmojisAndStickers,
-    GatewayIntentBits.GuildIntegrations,
-    GatewayIntentBits.GuildInvites,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.GuildMessageTyping,
-    GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildScheduledEvents,
-    GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.DirectMessageTyping,
-    GatewayIntentBits.DirectMessageReactions,
-  ]
-});
-
-//Client variables to use everywhere
-client.commands = new Collection(); //an collection (like a digital map(database)) for all your commands
-client.aliases = new Collection(); //an collection for all your command-aliases
-client.categories = fs.readdirSync("./commands/"); //categories
-client.cooldowns = new Collection(); //an collection for cooldown commands of each user
-
-//Loading files, with the client variable like Command Handler, Event Handler, ...
-["command", "events"].forEach(handler => {
-  require(`./handlers/${handler}`)(client);
-});
-//login into the bot
-
-client.on('messageCreate', async (message) => {
-  if (message.content.startsWith('-work')) {
-    try {
-      message.reply(`work`);
-
-    } catch (err) {
-      console.log(err);
-      message.reply('Error occurred while resetting win totals');
-    }
+    GatewayIntentBits.MessageContent
+  ],
+  partials: [
+    Partials.Channel,
+    Partials.Message,
+    Partials.User,
+    Partials.GuildMember,
+    Partials.Reaction
+  ],
+  presence: {
+    activities: [{
+      name: "T.F.A is cool!",
+      type: 0
+    }],
+    status: 'dnd'
   }
 });
 
-client.login(process.env.BOT_TOKEN);
+// Host the bot:
+require('http').createServer((req, res) => res.end('Ready.')).listen(3000);
 
+// Getting the bot token:
+const AuthenticationToken = process.env.BOT_TOKEN;
+if (!AuthenticationToken) {
+  console.warn("[CRASH] Authentication Token for Discord bot is required! Use Envrionment Secrets or config.js.".red)
+  return process.exit();
+};
+
+// Handler:
+client.prefix_commands = new Collection();
+client.slash_commands = new Collection();
+client.user_commands = new Collection();
+client.message_commands = new Collection();
+client.modals = new Collection();
+client.events = new Collection();
+
+module.exports = client;
+
+["prefix", "application_commands", "modals", "events", "mongoose"].forEach((file) => {
+  require(`./handlers/${file}`)(client, config);
+});
+
+// Login to the bot:
+client.login(AuthenticationToken)
+  .catch((err) => {
+    console.error("[CRASH] Something went wrong while connecting to your bot...");
+    console.error("[CRASH] Error from Discord API:" + err);
+    return process.exit();
+  });
+
+// Handle errors:
+process.on('unhandledRejection', async (err, promise) => {
+  console.error(`[ANTI-CRASH] Unhandled Rejection: ${err}`.red);
+  console.error(promise);
+});
