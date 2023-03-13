@@ -26,7 +26,6 @@ client.on('messageCreate', async (message) => {
   if (message.channel.type !== 0) return;
   if (message.author.bot) return;
 
-  console.log('i show all the time')
 
   const database = await dbClient.db('warzoneWinsDB');
   const prefix = await db.get(`guild_prefix_${message.guild.id}`) || config.Prefix || "?";
@@ -36,6 +35,7 @@ client.on('messageCreate', async (message) => {
   if (!message.member) message.member = await message.guild.fetchMember(message);
 
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  console.log("🚀 ~ file: messageCreate.js:38 ~ client.on ~ args:", args)
   const cmd = args.shift().toLowerCase();
   if (cmd.length == 0) return;
 

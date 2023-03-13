@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "T.F.A#7524",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^7.6.2",
