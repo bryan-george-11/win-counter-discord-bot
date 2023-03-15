@@ -1,7 +1,4 @@
 const { EmbedBuilder } = require("discord.js");
-//const { MongoClient } = require('mongodb');
-//const mongo = process.env.MONGODB_TOKEN;
-//warzoneDBClient = new MongoClient(mongo, { useNewUrlParser: true, useUnifiedTopology: true });
 
 module.exports = {
   config: {
