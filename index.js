@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Client, Partials, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Partials, Collection, GatewayIntentBits, ActivityType } = require('discord.js');
 const config = require('./config/config');
 const colors = require("colors");
 
@@ -22,10 +22,10 @@ const client = new Client({
   ],
   presence: {
     activities: [{
-      name: "T.F.A is cool!",
-      type: 0
+      name: "Counting WZ Wins",
+      type: ActivityType.Competing
     }],
-    status: 'dnd'
+    status: 'online'
   }
 });
 
