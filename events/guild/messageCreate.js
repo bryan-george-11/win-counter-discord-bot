@@ -5,6 +5,7 @@ const { QuickDB } = require("quick.db");
 const db = new QuickDB();
 
 const { MongoClient } = require('mongodb');
+const { re } = require("mathjs");
 const uri = process.env.MONGODB_TOKEN;
 const dbClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -23,6 +24,7 @@ module.exports = {
 })();
 
 client.on('messageCreate', async (message) => {
+
   if (message.channel.type !== 0) return;
   if (message.author.bot) return;
 
@@ -30,7 +32,16 @@ client.on('messageCreate', async (message) => {
   const database = await dbClient.db('warzoneWinsDB');
   const prefix = await db.get(`guild_prefix_${message.guild.id}`) || config.Prefix || "?";
 
-  if (!message.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(prefix)) {
+    message.reply('Only -win and -leaderboard are accepted commands for this channel. This message will be self destruct in 5 seconds!')
+      .then(msg => {
+        setTimeout(() => msg.delete(), 5000)
+        setTimeout(() => message.delete().then(() => console.log(`Deleted message from ${message.author.tag} because it did not start with "${prefix}" and was ${message.content}`)), 5000)
+      })
+      .catch(console.error);
+  }
+
+  //if (!message.content.startsWith(prefix)) return;
   if (!message.guild) return;
   if (!message.member) message.member = await message.guild.fetchMember(message);
 
@@ -80,4 +91,5 @@ client.on('messageCreate', async (message) => {
       console.error(error);
     };
   }
+    
 });
