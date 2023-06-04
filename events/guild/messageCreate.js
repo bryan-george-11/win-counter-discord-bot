@@ -31,15 +31,15 @@ client.on('messageCreate', async (message) => {
 
   const database = await dbClient.db('warzoneWinsDB');
   const prefix = await db.get(`guild_prefix_${message.guild.id}`) || config.Prefix || "?";
-
-  if (!message.content.startsWith(prefix)) {
+  // TODO - Add a check for the channel to see if it is the allowed channel
+ /* if (!message.content.startsWith(prefix)) {
     message.reply('Only -win and -leaderboard are accepted commands for this channel. This message will be self destruct in 5 seconds!')
       .then(msg => {
         setTimeout(() => msg.delete(), 5000)
         setTimeout(() => message.delete().then(() => console.log(`Deleted message from ${message.author.tag} because it did not start with "${prefix}" and was ${message.content}`)), 5000)
       })
       .catch(console.error);
-  }
+  }*/
 
   //if (!message.content.startsWith(prefix)) return;
   if (!message.guild) return;
@@ -91,5 +91,5 @@ client.on('messageCreate', async (message) => {
       console.error(error);
     };
   }
-    
+
 });
