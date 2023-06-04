@@ -12,3 +12,6 @@
 COD Warzone Win Counter Discord Bot
 
 
+## How to start 
+
+nodemon start
