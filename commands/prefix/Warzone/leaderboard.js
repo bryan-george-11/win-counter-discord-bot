@@ -21,7 +21,6 @@ module.exports = {
         .setColor('F1C40F')
         .setTitle('COD Warzone Season 2 Win Leaderboard')
         .setAuthor({ name: 'Top 5 Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
-        // TODO un hide this post build
         .setDescription(`Top 5 Win Totals:\n${leaderboard}`)
         .setThumbnail(theLeader.avatarURL({ format: 'png', size: 4096 }))
         .setImage('https://cdn.akamai.steamstatic.com/steam/apps/1962663/capsule_616x353_alt_assets_0.jpg?t=1682465274')
