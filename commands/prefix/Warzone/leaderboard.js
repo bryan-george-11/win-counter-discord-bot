@@ -21,7 +21,6 @@ module.exports = {
         .setColor('F1C40F')
         .setTitle('COD Warzone Season 4 Win Leaderboard')
         .setAuthor({ name: 'Top 5 Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
-        // TODO un hide this post build
         .setDescription(`Top 5 Win Totals:\n${leaderboard}`)
         .setThumbnail(theLeader.avatarURL({ format: 'png', size: 4096 }))
         .setImage('https://imgsvc.trackercdn.com/url/size(1280x720),fit(cover),quality(100)/https%3A%2F%2Ftrackercdn.com%2Fghost%2Fimages%2F2023%2F6%2F1373_MW2-Warzone-Season-4-Key-Art-Featured-Operator.jpg/image.jpg')
