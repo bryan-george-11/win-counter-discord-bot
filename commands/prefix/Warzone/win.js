@@ -27,13 +27,13 @@ module.exports = {
             // Reply with the updated win totals for each user
             const winTrackerEmbed = new EmbedBuilder()
                 .setColor('F1C40F')
-                .setTitle('COD Warzone Season 2 Warzone Victory')
+                .setTitle('COD Warzone Season 4 Warzone Victory')
                 .setAuthor({ name: 'Warzone Victory', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
                 .setDescription(`Win Totals Below Have now been updated:\n\n ${winTotals}`)
                 .setThumbnail(client.user.displayAvatarURL(({ format: 'png', size: 4096 })))
                 //.setImage('https://cdn.oneesports.gg/cdn-data/2022/12/MW2_Season2_Ronin-1024x576.webp')
                 .setTimestamp()
-            //.setFooter({ text: 'Season 2', iconURL: message.user.avatarURL({ format: 'png', size: 4096 }) });
+            //.setFooter({ text: 'Season 4', iconURL: message.user.avatarURL({ format: 'png', size: 4096 }) });
 
             message.channel.send({ embeds: [winTrackerEmbed] });
         } catch (err) {
