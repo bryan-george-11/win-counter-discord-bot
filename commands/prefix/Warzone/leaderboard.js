@@ -19,7 +19,7 @@ module.exports = {
       // Reply with the top 5 leaderboard
       const leaderboardEmbed = new EmbedBuilder()
         .setColor('F1C40F')
-        .setTitle('COD Warzone Season 2 Win Leaderboard')
+        .setTitle('COD Warzone Season 4 Wins Leaderboard')
         .setAuthor({ name: 'Top 5 Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
         .setDescription(`Top 5 Win Totals:\n${leaderboard}`)
         .setThumbnail(theLeader.avatarURL({ format: 'png', size: 4096 }))
