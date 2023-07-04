@@ -16,13 +16,17 @@ module.exports = {
       const firstPerson = top5[0]._id
       const theLeader = client.users.cache.get(firstPerson);
 
+      const rankedLeaderboard = top5.map((user, index) => `${index + 1} - <@${user._id}> - ${!user.rankedWins ? 0 : user.rankedWins} wins`).join('\n');
+      const rankedFirstPerson = top5[0]._id
+      const theRankedLeader = client.users.cache.get(rankedFirstPerson);
+
       // Reply with the top 5 leaderboard
       const leaderboardEmbed = new EmbedBuilder()
         .setColor('F1C40F')
         .setTitle('COD Warzone Season 4 Wins Leaderboard')
         .setAuthor({ name: 'Top 5 Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
-        .setDescription(`Top 5 Win Totals:\n${leaderboard}`)
-        .setThumbnail(theLeader.avatarURL({ format: 'png', size: 4096 }))
+        .setDescription(`Top 5 Ranked Win Totals:\n${rankedLeaderboard} \n\n Top 5 Career Win Totals:\n${leaderboard} \n\n`)
+        .setThumbnail(theRankedLeader.avatarURL({ format: 'png', size: 4096 }))
         .setImage('https://cdn.akamai.steamstatic.com/steam/apps/1962663/capsule_616x353_alt_assets_0.jpg?t=1682465274')
         .setTimestamp()
 
