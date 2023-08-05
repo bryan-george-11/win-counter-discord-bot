@@ -31,6 +31,7 @@ module.exports = {
         .setDescription(`**_${currentSeason} Win Totals:_**\n${seasonLeaderboard} \n\n **_Career Win Totals:_**\n${leaderboard} \n\n`)
         .setThumbnail(theSeasonLeader.avatarURL({ format: 'png', size: 4096 }))
         .setImage(`https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/08/02/warzone-2-s5-patch-notes.jpg?${rand}`)
+        .setFooter({ text: 'Victory', iconURL: `https://static.wikia.nocookie.net/callofduty/images/4/47/RankedPlay_Logo_MWII.png/revision/latest/scale-to-width-down/250?cb=20230227180441?${rand}` })
         .setTimestamp()
 
       message.channel.send({ embeds: [leaderboardEmbed] })

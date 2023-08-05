@@ -21,6 +21,8 @@ module.exports = {
             const updateCareer = userIds.map(userId => collection.updateOne({ _id: userId }, { $inc: { wins: 1 } }, { upsert: true }));
             await Promise.all(updateSeason, updateCareer);
 
+            const rand = Math.random().toString(36).slice(2);
+
             // Get the updated win totals for each user from the database
             const users = await collection.find({ _id: { $in: userIds } }).toArray();
             const seasonWinTotals = users.map((user, index) => `${index + 1} - ${message.guild.members.cache.get(user._id).displayName}: ${user.seasonWins || 0}`).join('\n');
@@ -33,8 +35,7 @@ module.exports = {
                 .setTitle(`COD Warzone ${currentSeason} Warzone Victory`)
                 .setAuthor({ name: `${currentSeason} Win`, iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
                 .setDescription(`Win Totals Below Have now been updated:\n\n ${seasonWinTotals}`)
-                .setThumbnail('https://wzhub.gg/images/ranked-header-2.webp')
-                //.setFooter({ text: 'Ranked mode', iconURL: 'https://wzhub.gg/images/ranked-header-2.webp' })
+                .setThumbnail(`https://static.wikia.nocookie.net/callofduty/images/4/47/RankedPlay_Logo_MWII.png/revision/latest/scale-to-width-down/250?cb=20230227180441?${rand}`)
                 .setTimestamp()
 
             message.channel.send({ embeds: [winTrackerEmbed] });
