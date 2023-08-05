@@ -16,7 +16,7 @@ module.exports = {
       const firstPerson = top5[0]._id
       const theLeader = client.users.cache.get(firstPerson);
 
-      const seasonLeaderboard = top5.map((user, index) => `${index + 1} - <@${user._id}> - ${!user.seasonWins ? 0 : user.seasonWins} wins`).join('\n');
+      const seasonLeaderboard = top5.map((user, index) => `${index + 1} - <@${user._id}> - ${!user.seasonWins ? `_Do you think you'll ever manage to get a win?_` : user.seasonWins + `${user.seasonWins === 1 ? ` win` : ` wins`}`}`).join('\n');
       const seasonFirstPerson = top5[0]._id
       const theSeasonLeader = client.users.cache.get(seasonFirstPerson);
 
@@ -28,7 +28,7 @@ module.exports = {
         .setColor('F1C40F')
         .setTitle(`COD Warzone ${currentSeason} Wins Leaderboard`)
         .setAuthor({ name: 'Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
-        .setDescription(`${currentSeason} Win Totals:\n${seasonLeaderboard} \n\n Career Win Totals:\n${leaderboard} \n\n`)
+        .setDescription(`**_${currentSeason} Win Totals:_**\n${seasonLeaderboard} \n\n **_Career Win Totals:_**\n${leaderboard} \n\n`)
         .setThumbnail(theSeasonLeader.avatarURL({ format: 'png', size: 4096 }))
         .setImage(`https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/08/02/warzone-2-s5-patch-notes.jpg?${rand}`)
         .setTimestamp()
