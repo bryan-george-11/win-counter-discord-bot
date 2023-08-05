@@ -2,8 +2,8 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     config: {
-        name: "resetallwins",
-        description: "Reset All Wins for Everyone",
+        name: "resetseasonwins",
+        description: "Reset Season Wins for Everyone",
     },
     permissions: ['SendMessages'],
     owner: false,
@@ -16,8 +16,9 @@ module.exports = {
 
             if (message.guild.roles.cache.find(role => role.name === adminRole)) {
                 const collection = await database.collection(process.env.DB_COLLECTION_NAME);
-                const result = await collection.deleteMany({});
-                console.log(`Deleted ${result.deletedCount} documents`);
+                const resetSeasonWins = await collection.updateMany({}, { $set: { seasonWins: 0 } });
+
+                console.log(`Deleted ${resetSeasonWins.modifiedCount} documents`);
                 message.reply(`All win totals have been reset!`);
             }
             else {
