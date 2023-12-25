@@ -29,6 +29,9 @@ const client = new Client({
   },
 });
 
+// User ID to whom you want to send the offline/online message
+const userIdToNotify = process.env.MY_ID;
+
 // Host the bot:
 require('http').createServer((req, res) => res.end('Ready.')).listen(3000);
 
@@ -53,6 +56,22 @@ module.exports = client;
   require(`./handlers/${file}`)(client, config);
 });
 
+// Function to send a direct message to a user
+async function sendDirectMessage(userId, content) {
+  const user = await client.users.fetch(userId);
+
+  if (user) {
+    try {
+      await user.send(content);
+      console.log('Direct message sent successfully!');
+    } catch (error) {
+      console.error('Error sending direct message:', error.message);
+    }
+  } else {
+    console.error(`User with ID ${userId} not found.`);
+  }
+}
+
 
 // Login to the bot:
 client.login(AuthenticationToken)
@@ -67,6 +86,11 @@ client.once('ready', () => {
   client.user.setAvatar('https://png.pngtree.com/png-vector/20230304/ourmid/pngtree-head-robot-avatar-profile-vector-png-image_6631781.png')
     .then(() => console.log('Avatar set successfully!'))
     .catch(console.error);
+});
+
+client.once('disconnect', () => {
+  // Bot went offline, send a direct message
+  sendDirectMessage(userIdToNotify, 'Your Discord bot has gone offline!');
 });
 
 // Handle errors:
