@@ -27,7 +27,7 @@ module.exports = {
             // Reply with the updated win totals for each user
             const winTrackerEmbed = new EmbedBuilder()
                 .setColor('F1C40F')
-                .setTitle('COD Warzone Season 4 Warzone Victory')
+                .setTitle('COD Warzone Warzone Victory')
                 .setAuthor({ name: 'Warzone Victory', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
                 .setDescription(`Win Totals Below Have now been updated:\n\n ${winTotals}`)
                 .setThumbnail(client.user.displayAvatarURL(({ format: 'png', size: 4096 })))
