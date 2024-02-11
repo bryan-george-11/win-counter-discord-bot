@@ -23,7 +23,7 @@ module.exports = {
 
       
 
-      let currentSeason = 'Warzone 3 Season 1'
+      let currentSeason = 'Warzone 3 Season 2'
       const rand = Math.random().toString(36).slice(2);
 
       // Reply with the top 5 leaderboard
@@ -33,7 +33,7 @@ module.exports = {
         .setAuthor({ name: 'Leaderboard', iconURL: 'https://as2.ftcdn.net/v2/jpg/01/39/31/79/1000_F_139317922_FAWtQJMMVOVvDeM2OVg0ofiwIvBUrrux.jpg' })
         .setDescription(`**_${currentSeason} Win Totals:_**\n${seasonLeaderboard} \n\n **_Career Win Totals:_**\n${leaderboard} \n\n`)
         .setThumbnail(theSeasonLeader.avatarURL({ format: 'png', size: 4096 }))
-        .setImage(`https://www.charlieintel.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.charlieintel.com/wp-content/uploads/2023/12/06/season-1-modern-warfare-3-update.jpg?${rand}`)
+        .setImage(`https://www.charlieintel.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.charlieintel.com/wp-content/uploads/2024/01/26/MW3-Season-2-patch-notes-1.jpg?${rand}`)
         .setFooter({ text: 'Victory', iconURL: `https://static.wikia.nocookie.net/callofduty/images/4/47/RankedPlay_Logo_MWII.png/revision/latest/scale-to-width-down/250?cb=20230227180441?${rand}` })
         .setTimestamp()
 

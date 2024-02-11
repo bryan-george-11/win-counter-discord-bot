@@ -90,7 +90,7 @@ client.once('ready', () => {
 
 client.once('disconnect', () => {
   // Bot went offline, send a direct message
-  sendDirectMessage(userIdToNotify, 'Your Discord bot has gone offline!');
+  sendDirectMessage(userIdToNotify, '⚠️ **Bot Offline!** I have unexpectedly disconnected from Discord.');
 });
 
 // Handle errors:

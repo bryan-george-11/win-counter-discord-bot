@@ -27,7 +27,7 @@ module.exports = {
             const users = await collection.find({ _id: { $in: userIds } }).toArray();
             const seasonWinTotals = users.map((user, index) => `${index + 1} - ${message.guild.members.cache.get(user._id).displayName}: ${user.seasonWins || 0}`).join('\n');
 
-            let currentSeason = 'Warzone 3 Season 1'
+            let currentSeason = 'Warzone 3 Season 2'
 
             // Reply with the updated win totals for each user
             const winTrackerEmbed = new EmbedBuilder()

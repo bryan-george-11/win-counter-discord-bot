@@ -15,3 +15,7 @@ COD Warzone Win Counter Discord Bot
 ## How to start 
 
 nodemon start
+
+## NVM version 
+
+16.9.0
